@@ -5,7 +5,7 @@ import mimetypes
 class OmekaClient:
     
     def __init__(self, endpoint, key=None):
-        self._endpoint = endpoint
+        self._endpoint = self._slash_check(endpoint)
         self._key = key
         self._http = httplib2.Http()
     
@@ -47,11 +47,17 @@ class OmekaClient:
         return mimetypes.guess_type(filename)[0] or 'application/octet-stream'
 
     def _request(self, method, resource, id=None, data=None, query=None, headers=None):
-        url = self._endpoint + "/" + resource
+        url = self._endpoint + resource
         if id is not None:
-            url += "/" + str(id)
+            url += str(id)
         if self._key is not None:
             query["key"] = self._key
         url += "?" + urllib.urlencode(query)
         resp, content = self._http.request(url, method, body=data, headers=headers)
         return resp, content
+
+    #remove extraneous slashes
+    def _slash_check(self, url):
+        if url[len(url)-1] != "/":
+            url += "/"
+        return url
