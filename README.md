@@ -28,5 +28,5 @@ sample_json = json.loads('{
         {"goo":3}
     ]}')
 csv = converter.process_json( sample_json )
-# => 1,2
+print csv # 1,2
 ```
