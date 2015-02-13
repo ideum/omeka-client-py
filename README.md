@@ -8,28 +8,13 @@ Make a REST API call to an Omeka site.
 (`httplib2` is not always installed)
 
 ##Usage
-    
-    python test.py
 
-To prettyfy JSON:
+Ensure that OmekaClient is receiving the correct url endpoint and API key.
 
-    python test.py | python -m json.tool\
-
-Types of requests include GET, POST, PUT, and DELETE
-
-```python
-# GET /items
-#response, content = client.get("items")
-
-# POST /items
-#response, content = client.post("items", data='{"public":true}')
-
-# PUT /items/:id
-#response, content = client.put("items", 1, data='{"public":false}')
-
-# DELETE /items/:id
-#response, content = client.delete("items", 1)
-```
+##Optional Arguements
+- `-h` print usage
+- `-o [filename]` outputs csv to filename
+- `-c [column titles]` prepends column titles on the first line, must be the same length as columns in the csv. Example: `-c "title, id, description"`
 
 ##Converting JSON to CSV
 The class `JsonToCsv` takes a format to grab from json and outputs lines in a csv format.
@@ -42,6 +27,6 @@ sample_json = json.loads('{
         {"qux":2},
         {"goo":3}
     ]}')
-csv = converter.process_json( sample_json ) 
+csv = converter.process_json( sample_json )
 # => 1,2
 ```
