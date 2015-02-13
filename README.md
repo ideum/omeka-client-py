@@ -3,17 +3,17 @@ Make a REST API call to an Omeka site.
 
 ##Setup
 
-	pip install -r requirements.txt
+    pip install -r requirements.txt
 
 (`httplib2` is not always installed)
 
 ##Usage
-	
-	python test.py
+    
+    python test.py
 
 To prettyfy JSON:
 
-	python test.py | python -m json.tool\
+    python test.py | python -m json.tool\
 
 Types of requests include GET, POST, PUT, and DELETE
 

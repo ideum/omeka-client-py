@@ -13,16 +13,18 @@ class OmekaClient:
         return self._request("GET", resource, id=id, query=query)
     
     def post(self, resource, data, query={}, headers={}):
-        return self._request("POST", resource, data=data, query=query, headers=headers)
+        return self._request("POST", resource, 
+            data=data, query=query, headers=headers)
     
     def put(self, resource, id, data, query={}):
-        return self._request("PUT", resource, id, data=data, query=query)
+        return self._request("PUT", resource, id, 
+            data=data, query=query)
     
     def delete(self, resource, id, query={}):
         return self._request("DELETE", resource, id, query=query)
     
+    ''' data:JSON metadata, filename:string, contents:file contents '''
     def post_file(self, data, filename, contents):
-        """ data is JSON metadata, filename is a string, contents is file contents """
         BOUNDARY = '----------E19zNvXGzXaLvS5C'
         CRLF = '\r\n'
         headers = {'Content-Type': 'multipart/form-data; boundary=' + BOUNDARY}
@@ -32,7 +34,8 @@ class OmekaClient:
         L.append('')
         L.append(data)
         L.append('--' + BOUNDARY)
-        L.append('Content-Disposition: form-data; name="file"; filename="%s"' % filename)
+        L.append('Content-Disposition: \
+            form-data; name="file"; filename="%s"' % filename)
         L.append('Content-Type: %s' % self.get_content_type(filename))
         L.append('')
         L.append(contents)
@@ -46,7 +49,8 @@ class OmekaClient:
         """ use mimetypes to detect type of file to be uploaded """
         return mimetypes.guess_type(filename)[0] or 'application/octet-stream'
 
-    def _request(self, method, resource, id=None, data=None, query=None, headers=None):
+    def _request(self, method, resource, 
+            id=None, data=None, query=None, headers=None):
         url = self._endpoint + resource
         if id is not None:
             url += str(id)

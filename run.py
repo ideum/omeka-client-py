@@ -5,7 +5,8 @@ import json
 from jsontocsv import JsonToCsv
 from omekaclient import OmekaClient
 
-client = OmekaClient("http://ideumtest01.omeka.net/api/", "26ee48493d9b540742a35e6216da965d1187548a")
+client = OmekaClient("http://ideumtest01.omeka.net/api/", 
+	"26ee48493d9b540742a35e6216da965d1187548a")
 
 #uses: get(self, resource, id=None, query={})
 response, content = client.get("items", None, {"collection": 1})
