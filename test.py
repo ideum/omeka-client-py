@@ -1,23 +1,18 @@
 #!/usr/bin/python
 
+import json
+
+from jsontocsv import JsonToCsv
 from omekaclient import OmekaClient
 
 client = OmekaClient("http://ideumtest01.omeka.net/api/", "26ee48493d9b540742a35e6216da965d1187548a")
 
-# GET /items/:id
-response, content = client.get("collections", id=1)
+#uses: get(self, resource, id=None, query={})
+response, content = client.get("items", None, {"collection": 1})
 
-# GET /items
-#response, content = client.get("items")
-
-# POST /items
-#response, content = client.post("items", data='{"public":true}')
-
-# PUT /items/:id
-#response, content = client.put("items", 1, data='{"public":false}')
-
-# DELETE /items/:id
-#response, content = client.delete("items", 1)
+converter = JsonToCsv('element_texts[0].text,collection.id');
+csv = converter.process_json( json.loads(content) )
 
 #print response, content
-print content
+#print json.dumps(json.loads(content));
+print csv
