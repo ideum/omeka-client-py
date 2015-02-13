@@ -36,7 +36,12 @@ The class `JsonToCsv` takes a format to grab from json and outputs lines in a cs
 
 ```python
 converter = JsonToCsv('foo,bar[0].qux');
-sample_json = json.loads('{"foo":1, "bar":[{"qux":2},{"goo":3}]}')
+sample_json = json.loads('{
+    "foo":1, 
+    "bar":[
+        {"qux":2},
+        {"goo":3}
+    ]}')
 csv = converter.process_json( sample_json ) 
 # => 1,2
 ```
